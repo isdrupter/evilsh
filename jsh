@@ -1,9 +1,10 @@
 #!/bin/sh
 #make a cmd json
-bbj=`busybox jshon -s 2>/dev/null 1>/dev/null`
+tempf=/tmp/jshcmd
+echo $@ > $tempf
 
-getEnv(){
-ip=$bbj"`(/sbin/ifconfig lo 2>/dev/null | grep Mask | cut -d ':' -f2 | cut -d " " -f1)`"
+bbj="$(jshon -s 2>/dev/null 1>/dev/null)"
+ip=$bbj"$(/sbin/ifconfig lo | grep Mask | cut -d ':' -f2 | cut -d " " -f1)"
 unixtime=$bbj"$(date +%s)"
 date=$bbj"$(date)"
 uptime=$bbj"$(uptime | sed s/\,//)"
@@ -14,16 +15,15 @@ version=$bbj"$(cat /proc/version)"
 memstat=$bbj"$(cat /proc/meminfo | head -n 3 | tr -s '\n' ' ')"
 cwd=$bbj"$(pwd)"
 shell=$bbj"$(echo $SHELL)"
-cmdline=$bbj"$@"
-output=`./busybox jshon -s "$($@)"`
 getstty=$bbj"$(stty)"
 term=$bbj"$(echo $TERM)"
 cpuname=$bbj"$(cat /proc/cpuinfo | grep name)"
-if ([ ! -s /tmp/.status ] && [ -f /tmp/.status ]); then busy="SYSTEM_BUSY" ; else busy="SYSTEM_READY";fi
-uxt=`date +%s`
-(echo $cmdline >/tmp/hash-cmd)
-hashcmd=`md5sum /tmp/hash-cmd | sed -e 's/\  \/tmp\/hash-cmd\>//g'`
-uuid=$bbj"'$uxt.$hashcmd'"
+cmdline=$bbj"$(echo $(cat $tempf))"
+#output=$bbj"$($cmdline)"
+output=$bbj"$(ash $tempf)"
+status=$bbj"$(if ([ -s /tmp/.status ] && [ -f /tmp/.status ]); then echo "SYSTEM_BUSY" ; else echo "SYSTEM_READY";fi)"
+hashcmd=$bbj"$(md5sum $tempf | sed -e 's/\  \/tmp\/jshcmd\>//g')"
+uuid=$bbj"'$unixtime.$hashcmd'"
 
 
 echo '{
@@ -41,16 +41,8 @@ echo '{
 "term": "'$term'",
 "stty": "'$getstty'",
 "cwd": "'$cwd'",
-"status": "'$busy'",
-"cmduuid": "'$uuid'",
+"uuid": "'$uuid'",
 "cmdline": "'$cmdline'",
 "output": "'$output'"
-}'
-}
-
-main(){
-getEnv $@
-rm /tmp/hash-cmd
-}
-
-main $@ 2>/dev/null
+}' 
+>$tempf
