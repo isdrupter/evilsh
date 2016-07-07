@@ -107,8 +107,6 @@ intf=${5:-"eth0"}
 subtop=${6:-"in"}
 pubtop=${7:-"out"}
 ip=$(/sbin/ifconfig $intf | grep Mask | cut -d ':' -f2 | cut -d " " -f1)
-#key="$workdir/key"
-#echo 'xegwXos7sZe1WNRT' > $key
 echo "MqSH Version 1.0-----------------------------------------------"
 echo "Usage: [$0][[host]default:127.0.0.1]][[pass][default:x]]"
 echo "             \ [[path][[default:/var/bin]][[debug][[default:0]]"
