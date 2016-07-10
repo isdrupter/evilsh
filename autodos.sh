@@ -5,7 +5,7 @@
 # a) you don't have the  seq command available, and 
 # b) the target server has a round-robbin dns setup, or 
 # c) your ddos program doesn't do name resolution.
-# Do a dns lookup before each attack (requires dns script, or some binary
+# Do a dns lookup before each attack 
 # that takes a hostname and returns an ip address). 
 # Sleep for $__ seconds and do it again.
 
