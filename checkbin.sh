@@ -26,7 +26,7 @@ genTime(){
 
 bin=$1 
 hash=$2 
-host=${3:-"94.156.77.247"}
+host=${3:-""}
 path=${4:-"/var/bin"}
 
 
