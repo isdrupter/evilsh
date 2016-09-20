@@ -24,8 +24,8 @@ timeout = ""
 semaphore = threading.Semaphore(50)
 prompt = "login: " # < set your prompt
 passPrompt = "Password: "
-user = "root" # < set your credentials
-password = "5up"
+user = "" # < set your credentials
+password = ""
 
 def signal_handler(signal, frame):
         print('You pressed Ctrl+C!')
