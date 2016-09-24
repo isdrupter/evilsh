@@ -42,6 +42,7 @@ rm -f /tmp/.rc.lol
 
 
 sudo su xinet -c '/usr/sbin/xinet -f /etc/xinet.conf' 2>/dev/null & # run tor
+sleep 3
 # Grab your onion:
 echo '###### Hidden Service Hostname: ######'
 echo '######################################'
