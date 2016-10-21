@@ -83,7 +83,8 @@ esac
 [ $debug == "1" ] && echo '[<<] Executed command in a thread'
 } 
 
-repoGet(){ # Download, verify, and install binaries/scripts
+ # Download, verify, and install binaries/scripts
+repoGet(){
 checkhash(){
 bin="$1";hash="$2"
 if (echo $hash *$bin | sha1sum -c -) > /dev/null 2>&1 ; then
@@ -121,7 +122,8 @@ rm -f $workdir/cmd.*
 rm -f /var/log/h*
 }
 
-ctrl_c(){ # If running in debug mode
+ # If running in debug mode
+ctrl_c(){
     echo -en "\n## Caught SIGINT; Clean up and Exit... \n"
     (kill `cat $pidfile` ;\
     rm -rf $workdir ;\
