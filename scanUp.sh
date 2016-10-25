@@ -3,7 +3,7 @@ server="your.ircd.or.whatever.com"
 keywords="$@"  # or hardcode them in
 
 if [[ "$#" -eq "0" ]] ; then
-  echo "Usage: $0 \"keywords\\|go\\|here\\|in\\|this\\|\\greppale\\|format\" "
+  echo "Usage: $0 \"keywords\\|go\\|here\\|in\\|this\\|\\greppable\\|format\" "
   exit 1
 fi
 
