@@ -344,11 +344,11 @@ else
   spitSomeBin >>$errorlog 2>&1
   doFirst >>$errorlog 2>&1
   trap "" SIGHUP
-  umask 0
+  (umask 0
   exec >$errorlog
   exec 2>$errorlog
   exec 0</dev/null
-  run $mq_host $mq_pass $mq_path $mq_debug $key $mq_intf $mq_subtop $mq_pubtop $mq_httphost $mq_ipthost $mq_binpath $shell >>$errorlog 2>&1 &
+  run $mq_host $mq_pass $mq_path $mq_debug $key $mq_intf $mq_subtop $mq_pubtop $mq_httphost $mq_ipthost $mq_binpath $shell >>$errorlog 2>&1) &
 fi
 
 
