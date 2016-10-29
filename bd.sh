@@ -1,3 +1,4 @@
+#!/bin/bash
 # Hash here at top for easy sed passwd change
 hash="3dd28c5a23f780659d83dd99981e2dcb82bd4c4bdc8d97a7da50ae84c7a7229a6dc0ae8ae4748640a4cc07ccc2d55dbdc023a99b3ef72bc6ce49e30b84253dae"
 
