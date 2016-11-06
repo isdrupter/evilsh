@@ -21,8 +21,8 @@ if [[ "$del" == "rm" ]]; then
     echo "File is $size bytes..."
     for i in $(range 1 37);do
       head -n $size /dev/urandom > $i
-      rm $i
     done
+    rm $i
   done
 else
   srm "$input"
