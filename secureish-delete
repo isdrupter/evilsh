@@ -1,0 +1,38 @@
+#!/bin/bash
+##################
+# Secureish Delete
+
+Delete(){
+input="$@"
+# Do we have secure-delete?
+srm -V >/dev/null 2>&1
+if [[ "$?" -eq "127" ]] ; then 
+  echo 'Srm is not present on the system, improvising...'
+  del=rm 
+else # Just use that than
+  echo 'We have srm, using that!'
+  del=srm
+fi
+
+# If not, overwrite the file with random crap(37 times) before deleting.
+if [[ "$del" == "rm" ]]; then 
+  for i in "$input";do
+    size=$(wc -c $i| awk '{print $1}')
+    echo "File is $size bytes..."
+    for i in $(range 1 37);do
+      head -n $size /dev/urandom > $i
+      rm $i
+    done
+  done
+else
+  srm "$input"
+fi
+}
+
+
+
+if [[ "$#" -gt "0" ]] ; then
+  Delete "$@"
+else
+  echo 'Not enough arguments, give me file to delete!'
+fi
