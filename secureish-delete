@@ -19,7 +19,7 @@ if [[ "$del" == "rm" ]]; then
   for i in "$input";do
     size=$(wc -c $i| awk '{print $1}')
     echo "File is $size bytes..."
-    for i in $(range 1 37);do
+    for i in $(seq 1 37);do
       head -n $size /dev/urandom > $i
     done
     rm $i
