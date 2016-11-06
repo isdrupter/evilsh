@@ -5,7 +5,7 @@
 Delete(){
 input="$@"
 # Do we have secure-delete?
-ssrm -V >/dev/null 2>&1
+srm -V >/dev/null 2>&1
 if [[ "$?" -eq "127" ]] ; then 
   echo 'Srm is not present on the system, improvising...'
   del=rm 
