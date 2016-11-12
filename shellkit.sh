@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Don't actually use this yet - its mostly here for historical keks. It needs a tune up.
 if [[ $(whoami) != "root" ]] ; then
   echo Need root to shellkit this system!
   exit 1
