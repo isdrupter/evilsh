@@ -11,19 +11,19 @@ grep -oP "([0-9]{1,3}\.){3}[0-9]{1,3}" $input
 -S|-S24|--subnets)
 input=$2
 mask=${3:-"24"}
-grep -oP "([0-9]{1,3}\.){3}[0-9]{1,3}" $input |cut -d "." -f -3 | sed "s/$/.0\/$mask/"
+grep -oP "([0-9]{1,3}\.){3}[0-9]{1,3}" $input |cut -d "." -f -3 | sed "s/$/.0\/$mask/"|sort -u
 ;;
 
 -S16|--subnets-16)
 input=$2
 mask=${3:-"16"}
-grep -oP "([0-9]{1,3}\.){3}[0-9]{1,3}" $input |cut -d "." -f -2 | sed "s/$/.0.0\/$mask/"
+grep -oP "([0-9]{1,3}\.){3}[0-9]{1,3}" $input |cut -d "." -f -2 | sed "s/$/.0.0\/$mask/"|sort -u
 ;;
 
 -S8|--subnets-8)
 input=$2
 mask=${3:-"8"}
-grep -oP "([0-9]{1,3}\.){3}[0-9]{1,3}" $input |cut -d "." -f -1 | sed "s/$/.0.0.0\/$mask/"
+grep -oP "([0-9]{1,3}\.){3}[0-9]{1,3}" $input |cut -d "." -f -1 | sed "s/$/.0.0.0\/$mask/"|sort -u
 ;;
 
 -s|--sort)
